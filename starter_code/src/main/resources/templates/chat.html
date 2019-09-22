@@ -13,7 +13,7 @@
     <div class="mdui-toolbar mdui-color-theme">
         <span class="mdui-typo-title">Chat Room</span>
         <div class="mdui-toolbar-spacer"></div>
-        <a class="mdui-btn mdui-btn-icon" th:href="@{/}">
+        <a id="exit-button" class="mdui-btn mdui-btn-icon" th:href="@{/}">
             <i class="mdui-icon material-icons">exit_to_app</i>
         </a>
     </div>
@@ -37,7 +37,7 @@
                     </div>
                     <div class="mdui-container" style="padding:20px 35px">
                         <!-- add a send button to send message -->
-                        <button class="mdui-btn mdui-color-theme mdui-ripple"
+                        <button id="send-message" class="mdui-btn mdui-color-theme mdui-ripple"
                                 onclick="sendMsgToServer()">Send
                         </button>
                         <button class="mdui-btn mdui-color-theme mdui-ripple"
