@@ -78,7 +78,7 @@ public class WebSocketChatServer {
      */
     @OnClose
     public void onClose(Session session, @PathParam("username") String username) {
-        //TODO: add close connection.
+        // add close connection.
         onlineSessions.remove(session.getId());
         Message message = new Message(MessageType.LEAVE, username, username + " LEFT THE CHAT", onlineSessions.size());
         try {
