@@ -5,4 +5,5 @@ package edu.udacity.java.nano.chat;
  */
 public class Message {
     // TODO: add message model.
+    private String name;
 }

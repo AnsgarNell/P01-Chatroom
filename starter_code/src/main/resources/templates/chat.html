@@ -38,6 +38,9 @@
                     <div class="mdui-container" style="padding:20px 35px">
                         <!-- TODO: add a send button to send message -->
                         <button class="mdui-btn mdui-color-theme mdui-ripple"
+                                onclick="sendMsgToServer()">Send
+                        </button>
+                        <button class="mdui-btn mdui-color-theme mdui-ripple"
                                 onclick="clearMsg()">Clear
                         </button>
                     </div>
@@ -73,10 +76,11 @@
      * 2、WebSocket client send message to server. example：webSocket.send();
      */
     function getWebSocket() {
+        var username =/*[[${username}]]*/;
         /**
-         * WebSocket client PS：URL shows WebSocket protocal, port number, and then end point.
-         */
-        var webSocket = new WebSocket(/*[[${webSocketUrl}]]*/ 'ws://localhost:8080/chat');
+        * WebSocket client PS：URL shows WebSocket protocol, port number, and then end point.
+        */
+         var webSocket = new WebSocket('ws://localhost:8080/chat/' + username);
         /**
          * websocket open connection.
          */
