@@ -30,7 +30,7 @@ public class WebSocketChatServer {
     ObjectMapper mapper = new ObjectMapper();
 
     private static void sendMessageToAll(String msg) {
-        //TODO: add send message method.
+        //add send message method.
         onlineSessions.forEach((id, session) -> {
             try{
                 session.getBasicRemote().sendText(msg);
@@ -45,9 +45,9 @@ public class WebSocketChatServer {
      */
     @OnOpen
     public void onOpen(Session session, @PathParam("username") String username) {
-        //TODO: add on open connection.
+        //add on open connection.
         onlineSessions.put(session.getId(), session);
-        Message message = new Message(MessageType.SPEAK, username, username + " ENTERED THE CHAT", onlineSessions.size());
+        Message message = new Message(MessageType.ENTER, username, username + " ENTERED THE CHAT", onlineSessions.size());
         try {
             String jsonInString = mapper.writeValueAsString(message);
             sendMessageToAll(jsonInString);
@@ -61,7 +61,7 @@ public class WebSocketChatServer {
      */
     @OnMessage
     public void onMessage(Session session, String jsonStr) {
-        //TODO: add send message.
+        // add send message.
         try {
             Message message = mapper.readValue(jsonStr, Message.class);
             message.setType(MessageType.SPEAK);
@@ -77,8 +77,16 @@ public class WebSocketChatServer {
      * Close connection, 1) remove session, 2) update user.
      */
     @OnClose
-    public void onClose(Session session) {
+    public void onClose(Session session, @PathParam("username") String username) {
         //TODO: add close connection.
+        onlineSessions.remove(session.getId());
+        Message message = new Message(MessageType.LEAVE, username, username + " LEFT THE CHAT", onlineSessions.size());
+        try {
+            String jsonInString = mapper.writeValueAsString(message);
+            sendMessageToAll(jsonInString);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
