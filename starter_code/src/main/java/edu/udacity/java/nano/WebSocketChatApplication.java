@@ -22,6 +22,14 @@ public class WebSocketChatApplication {
      * Login Page
      */
     @GetMapping("/")
+    public ModelAndView root() {
+        return new ModelAndView("/login");
+    }
+
+    /**
+     * Login Page
+     */
+    @GetMapping("/login")
     public ModelAndView login() {
         return new ModelAndView("/login");
     }
@@ -34,7 +42,7 @@ public class WebSocketChatApplication {
         // add code for login to chatroom.
         ModelAndView modelAndView = new ModelAndView("/chat");
         modelAndView.addObject("username", username);
-        modelAndView.addObject("url","ws://" + InetAddress.getLocalHost().getHostName() + ":" +request.getServerPort()+request.getContextPath() + "/chat");
+        modelAndView.addObject("url","ws://" + InetAddress.getLocalHost().getHostName() + ":" + request.getServerPort()+request.getContextPath() + "/chat");
         return modelAndView;
     }
 }

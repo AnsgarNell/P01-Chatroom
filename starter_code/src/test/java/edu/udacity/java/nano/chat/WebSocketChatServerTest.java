@@ -27,9 +27,9 @@ public class WebSocketChatServerTest {
     @Autowired
     private Environment env;
 
-    private static String BASE_URL = "http://localhost:8080";
+    private static String BASE_URL = "http://localhost:8090";
     private static String USERNAME = "udacity-student";
-    private static String CHAT_URL = "http://localhost:8080/index?username=" + USERNAME;
+    private static String CHAT_URL = BASE_URL + "/index?username=" + USERNAME;
 
     private WebDriver webDriver;
 
